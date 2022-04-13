@@ -36,7 +36,7 @@ namespace ECommerceSample.Areas.Product.Controllers.Api
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
-                return BadRequest(ex);
+                return BadRequest(ex.Message);
             }
         }
         [HttpGet("{id}/id")]
@@ -57,7 +57,7 @@ namespace ECommerceSample.Areas.Product.Controllers.Api
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
-                return BadRequest(ex);
+                return BadRequest(ex.Message);
             }
         }
     }

@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ECommerceSample.Areas.Product.Controllers.Api
 {
     [Route("api/product/tags")]
+    [ApiController]
     public class TagApiController : ControllerBase
     {
         private readonly TagRepositoryInterface _tagRepo;
@@ -40,7 +41,7 @@ namespace ECommerceSample.Areas.Product.Controllers.Api
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
-                return BadRequest(ex);
+                return BadRequest(ex.Message);
             }
         }
         [HttpGet("{id}")]
@@ -61,7 +62,7 @@ namespace ECommerceSample.Areas.Product.Controllers.Api
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
-                return BadRequest(ex);
+                return BadRequest(ex.Message);
             }
         }
         [HttpPost("")]
@@ -90,10 +91,10 @@ namespace ECommerceSample.Areas.Product.Controllers.Api
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
-                return BadRequest(ex);
+                return BadRequest(ex.Message);
             }
         }
-        [HttpPut("{id}")]
+        [HttpPut("update/{id}")]
         public async Task<IActionResult> Update(long id, TagUpdateViewModel model)
         {
 
@@ -123,7 +124,7 @@ namespace ECommerceSample.Areas.Product.Controllers.Api
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
-                return BadRequest(ex);
+                return BadRequest(ex.Message);
             }
         }
     }
