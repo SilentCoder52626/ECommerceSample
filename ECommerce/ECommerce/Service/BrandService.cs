@@ -23,7 +23,7 @@ namespace ECommerce.Service
         public async Task<Brand> Create(BrandCreateDto dto)
         {
             using var Tx = TransactionScopeHelper.GetInstance();
-            ValidateName(dto.Name);
+            await ValidateName(dto.Name);
             var Brand = new Brand(dto.Name);
             await _brandRepo.Insert(Brand).ConfigureAwait(false);
             Tx.Complete();
@@ -34,13 +34,13 @@ namespace ECommerce.Service
         {
             using var Tx = TransactionScopeHelper.GetInstance();
             var Brand = await _brandRepo.GetById(dto.BrandId).ConfigureAwait(false) ?? throw new BrandNotFoundException();
-            ValidateName(dto.Name,Brand);
+            await ValidateName(dto.Name,Brand);
             Brand.Update(dto.Name);
             await _brandRepo.Update(Brand).ConfigureAwait(false);
             Tx.Complete();
         }
 
-        private async void ValidateName(string name,Brand? brand=null)
+        private async Task ValidateName(string name,Brand? brand=null)
         {
             var BrandByName = await _brandRepo.GetByName(name).ConfigureAwait(false);
             if(BrandByName != brand && BrandByName != null)

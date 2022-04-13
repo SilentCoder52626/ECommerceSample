@@ -23,7 +23,7 @@ namespace ECommerce.Service
         public async Task<Category> Create(CategoryCreateDto dto)
         {
             using var Tx = TransactionScopeHelper.GetInstance();
-            ValidateName(dto.Name);
+            await ValidateName(dto.Name);
             var Category = new Category(dto.Name);
             await _categoryRepo.Insert(Category).ConfigureAwait(false);
             Tx.Complete();
@@ -34,13 +34,13 @@ namespace ECommerce.Service
         {
             using var Tx = TransactionScopeHelper.GetInstance();
             var Category = await _categoryRepo.GetById(dto.CategoryId).ConfigureAwait(false) ?? throw new CategoryNotFoundException();
-            ValidateName(dto.Name,Category);
+            await ValidateName(dto.Name,Category);
             Category.Update(dto.Name);
             await _categoryRepo.Update(Category).ConfigureAwait(false);
             Tx.Complete();
         }
 
-        private async void ValidateName(string name,Category? Category=null)
+        private async Task ValidateName(string name,Category? Category=null)
         {
             var CategoryByName = await _categoryRepo.GetByName(name).ConfigureAwait(false);
             if (CategoryByName != Category && CategoryByName != null)

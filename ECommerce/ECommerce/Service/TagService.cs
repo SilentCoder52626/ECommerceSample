@@ -23,7 +23,7 @@ namespace ECommerce.Service
         public async Task<Tag> Create(TagCreateDto dto)
         {
             using var Tx = TransactionScopeHelper.GetInstance();
-            ValidateName(dto.Name);
+            await ValidateName(dto.Name);
             var Tag = new Tag(dto.Name);
             await _tagRepo.Insert(Tag).ConfigureAwait(false);
             Tx.Complete();
@@ -34,13 +34,13 @@ namespace ECommerce.Service
         {
             using var Tx = TransactionScopeHelper.GetInstance();
             var Tag = await _tagRepo.GetById(dto.TagId).ConfigureAwait(false) ?? throw new TagNotFoundException();
-            ValidateName(dto.Name,Tag);
+            await ValidateName(dto.Name,Tag);
             Tag.Update(dto.Name);
             await _tagRepo.Update(Tag).ConfigureAwait(false);
             Tx.Complete();
         }
 
-        private async void ValidateName(string name,Tag? Tag=null)
+        private async Task ValidateName(string name,Tag? Tag=null)
         {
             var TagByName = await _tagRepo.GetByName(name).ConfigureAwait(false);
             if(TagByName != Tag && TagByName != null )

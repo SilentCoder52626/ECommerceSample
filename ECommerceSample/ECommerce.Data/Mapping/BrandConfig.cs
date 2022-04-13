@@ -29,6 +29,9 @@ namespace ECommerce.Data.Mapping
                 .IsRequired();
             modelBuilder
                 .ToTable("brand")
+                .HasIndex(c => c.Name).IsUnique();
+            modelBuilder
+                .ToTable("brand")
                 .HasMany(c => c.Products)
                 .WithOne(c => c.Brand);
 

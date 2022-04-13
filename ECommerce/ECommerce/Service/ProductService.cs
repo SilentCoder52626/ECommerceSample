@@ -29,7 +29,7 @@ namespace ECommerce.Service
         public async Task<Product> Create(ProductCreateDto dto)
         {
             using var Tx = TransactionScopeHelper.GetInstance();
-            ValidateSKU(dto.SKU);
+            await ValidateSKU(dto.SKU);
             var Category = await _categoryRepo.GetById(dto.CategoryId).ConfigureAwait(false) ?? throw new CategoryNotFoundException();
             var Brand = await _brandRepo.GetById(dto.BrandId).ConfigureAwait(false) ?? throw new BrandNotFoundException();
             var Tag = await _tagRepo.GetById(dto.TagId).ConfigureAwait(false) ?? throw new TagNotFoundException();
@@ -61,7 +61,7 @@ namespace ECommerce.Service
         {
             using var Tx = TransactionScopeHelper.GetInstance();
             var Product = await _productRepo.GetById(dto.ProductId).ConfigureAwait(false) ?? throw new ProductNotFoundException();
-            ValidateSKU(dto.SKU, Product);
+            await ValidateSKU(dto.SKU, Product);
             var Category = await _categoryRepo.GetById(dto.CategoryId).ConfigureAwait(false) ?? throw new CategoryNotFoundException();
             var Brand = await _brandRepo.GetById(dto.BrandId).ConfigureAwait(false) ?? throw new BrandNotFoundException();
             var Tag = await _tagRepo.GetById(dto.TagId).ConfigureAwait(false) ?? throw new TagNotFoundException();
@@ -70,7 +70,7 @@ namespace ECommerce.Service
             Tx.Complete();
         }
 
-        private async void ValidateSKU(string sku, Product? product=null)
+        private async Task ValidateSKU(string sku, Product? product=null)
         {
             var ProductOfSameSku = await _productRepo.GetBySKU(sku).ConfigureAwait(false);
             if(ProductOfSameSku != product && ProductOfSameSku != null)

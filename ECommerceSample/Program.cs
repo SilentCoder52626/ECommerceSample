@@ -1,3 +1,4 @@
+using AspNetCoreHero.ToastNotification;
 using ECommerce;
 using ECommerceSample.Data;
 using Microsoft.AspNetCore.Identity;
@@ -27,7 +28,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 }
             );
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddNotyf(config => { config.DurationInSeconds = 10; config.IsDismissable = true; config.Position = NotyfPosition.TopRight; });
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -49,7 +50,13 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+      name: "areas",
+      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+    );
+});
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

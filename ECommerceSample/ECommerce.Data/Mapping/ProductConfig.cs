@@ -34,6 +34,9 @@ namespace ECommerce.Data.Mapping
                 .IsRequired();
             builder
                 .ToTable("product")
+                .HasIndex(c => c.SKU).IsUnique();
+            builder
+                .ToTable("product")
                 .Property(c => c.Description)
                 .HasColumnName("description")
                 .IsRequired();
