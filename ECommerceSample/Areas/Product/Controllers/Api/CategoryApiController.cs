@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ECommerceSample.Areas.Product.Controllers.Api
 {
     [Route("api/product/categories")]
+    [ApiController]
     public class CategoryApiController : ControllerBase
     {
         private readonly CategoryRepositoryInterface _categoryRepo;
@@ -40,7 +41,7 @@ namespace ECommerceSample.Areas.Product.Controllers.Api
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
-                return BadRequest(ex);
+                return BadRequest(ex.Message);
             }
         }
         [HttpGet("{id}")]
@@ -61,14 +62,18 @@ namespace ECommerceSample.Areas.Product.Controllers.Api
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
-                return BadRequest(ex);
+                return BadRequest(ex.Message);
             }
         }
-        [HttpPost("")]
+        [HttpPost]
         public async Task<IActionResult> Create(CategoryCreateViewModel model)
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
                 var Dto = new CategoryCreateDto()
                 {
                     Name = model.Name
@@ -86,14 +91,18 @@ namespace ECommerceSample.Areas.Product.Controllers.Api
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
-                return BadRequest(ex);
+                return BadRequest(ex.Message);
             }
         }
-        [HttpPut("{id}")]
+        [HttpPut("update/{id}")]
         public async Task<IActionResult> Update(long id, CategoryUpdateViewModel model)
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
                 var Category = await _categoryRepo.GetById(id).ConfigureAwait(true) ?? throw new CategoryNotFoundException();
 
                 var Dto = new CategoryUpdateDto()
@@ -114,7 +123,7 @@ namespace ECommerceSample.Areas.Product.Controllers.Api
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
-                return BadRequest(ex);
+                return BadRequest(ex.Message);
             }
         }
     }

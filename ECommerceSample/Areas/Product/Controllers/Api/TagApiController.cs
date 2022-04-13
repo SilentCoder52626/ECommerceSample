@@ -69,6 +69,10 @@ namespace ECommerceSample.Areas.Product.Controllers.Api
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
                 var Dto = new TagCreateDto()
                 {
                     Name = model.Name
@@ -92,8 +96,13 @@ namespace ECommerceSample.Areas.Product.Controllers.Api
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(long id, TagUpdateViewModel model)
         {
+
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
                 var Tag = await _tagRepo.GetById(id).ConfigureAwait(true) ?? throw new TagNotFoundException();
 
                 var Dto = new TagUpdateDto()

@@ -1,4 +1,5 @@
 using AspNetCoreHero.ToastNotification;
+using AspNetCoreHero.ToastNotification.Extensions;
 using ECommerce;
 using ECommerceSample.Data;
 using Microsoft.AspNetCore.Identity;
@@ -61,5 +62,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
-
+app.UseNotyf();
 app.Run();
