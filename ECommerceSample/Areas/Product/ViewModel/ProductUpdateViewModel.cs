@@ -1,9 +1,18 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ECommerce.Entity;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace ECommerceSample.Areas.Product.ViewModel
 {
     public class ProductUpdateViewModel
     {
+        public IList<Brand> Brands { get; set; } = new List<Brand>();
+        public SelectList BrandSelectList => new SelectList(Brands, nameof(Brand.BrandId), nameof(Brand.Name));
+        public IList<Category> Categories { get; set; } = new List<Category>();
+        public SelectList CategorySelectList => new SelectList(Categories, nameof(Category.CategoryId), nameof(Category.Name));
+
+        public IList<Tag> Tags { get; set; } = new List<Tag>();
+        public SelectList TagSelectList => new SelectList(Tags, nameof(Tag.TagId), nameof(Tag.Name));
         public long Id { get; set; }
         public string OldImage { get; set; }
         [Required]
@@ -20,7 +29,6 @@ namespace ECommerceSample.Areas.Product.ViewModel
         public long TagId { get; set; }
         [Required]
         public decimal Price { get; set; }
-        public IFormFile Image { get; set; }
         [Required]
         public string Color { get; set; }
     }

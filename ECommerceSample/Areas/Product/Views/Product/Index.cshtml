@@ -87,15 +87,16 @@
                 </td>
                 <td>
                     <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-primary">Update</a>
-                    <a asp-action="UpdatePrice" asp-route-id="@item.Id" class="btn btn-danger">Update Price</a>
 
                     @if (item.AvailibilityStatus == Product.AvailabilityStatusAvailable)
                     {
-                        <a class="btn btn-danger btn-deactivate">Set As Available</a>
+                        <a class="btn btn-danger" asp-action="MarkAsUnAvailable" asp-route-id="@item.Id">Set As UnAvailable</a>
+
                     }
                     else
                     {
-                        <a class="btn btn-success btn-activate">Set As UnAvailable</a>
+                        <a class="btn btn-success" asp-action="MarkAsAvailable" asp-route-id="@item.Id">Set As Available</a>
+
                     }
                 </td>
             </tr>
