@@ -27,10 +27,9 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequiredLength = 4;
     options.Password.RequireDigit = false;
     options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-}
-            );
+});
 builder.Services.AddControllersWithViews();
-builder.Services.AddNotyf(config => { config.DurationInSeconds = 10; config.IsDismissable = true; config.Position = NotyfPosition.TopRight; });
+builder.Services.AddNotyf(config => { config.DurationInSeconds = 5; config.IsDismissable = true; config.Position = NotyfPosition.TopRight; });
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
