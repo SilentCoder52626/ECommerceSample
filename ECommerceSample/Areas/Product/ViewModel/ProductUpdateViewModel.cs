@@ -1,20 +1,27 @@
-﻿namespace ECommerceSample.Areas.Product.ViewModel
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ECommerceSample.Areas.Product.ViewModel
 {
-    public class ProductIndexViewModel
+    public class ProductUpdateViewModel
     {
         public long Id { get; set; }
+        public string OldImage { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Description { get; set; }
+        [Required]
         public string SKU { get; set; }
+        [Required]
         public long BrandId { get; set; }
-        public string Brand { get; set; }
+        [Required]
         public long CategoryId { get; set; }
-        public string Category { get; set; }
+        [Required]
         public long TagId { get; set; }
-        public string Tag { get; set; }
+        [Required]
         public decimal Price { get; set; }
-        public string Image { get; set; }
+        public IFormFile Image { get; set; }
+        [Required]
         public string Color { get; set; }
-        public string AvailibilityStatus { get; set; }
     }
 }

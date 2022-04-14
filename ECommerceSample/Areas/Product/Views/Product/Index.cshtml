@@ -1,0 +1,104 @@
+﻿@using ECommerce.Entity
+@model IEnumerable<ECommerceSample.Areas.Product.ViewModel.ProductIndexViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a class="btn btn-primary" asp-controller="Product" asp-area="Product" asp-action="Create">Add</a>
+
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                SKU
+            </th>
+            <th>
+                Brand
+            </th>
+            <th>
+                Category
+            </th>
+            <th>
+                Special Tag
+            </th>
+            <th>
+                Price
+            </th>
+
+            <th>
+                Color
+            </th>
+            <th>
+                Is Available
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SKU)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Brand)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tag)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.Color)
+                </td>
+                <td>
+                    @if (item.AvailibilityStatus == Product.AvailabilityStatusAvailable)
+                    {
+                        <span class="badge bg-success">Available</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-warning">UnAvailable</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-primary">Update</a>
+                    <a asp-action="UpdatePrice" asp-route-id="@item.Id" class="btn btn-danger">Update Price</a>
+
+                    @if (item.AvailibilityStatus == Product.AvailabilityStatusAvailable)
+                    {
+                        <a class="btn btn-danger btn-deactivate">Set As Available</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-success btn-activate">Set As UnAvailable</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

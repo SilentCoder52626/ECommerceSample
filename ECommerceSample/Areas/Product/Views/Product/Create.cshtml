@@ -1,0 +1,80 @@
+﻿@model ECommerceSample.Areas.Product.ViewModel.ProductCreateViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Model.Name" class="control-label"></label>
+                <input asp-for="Model.Name" class="form-control" />
+                <span asp-validation-for="Model.Name" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Model.SKU" class="control-label"></label>
+                <input asp-for="Model.SKU" class="form-control" />
+                <span asp-validation-for="Model.SKU" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Model.Image" class="control-label">Image</label>
+                <input asp-for="Model.Image" accept="image/*" enctype="multipart/form-data" class="form-control" />
+                <span asp-validation-for="Model.Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Brand</label>
+                <select asp-for="Model.BrandId" asp-items="@Model.BrandSelectList" class="form-control" required="required">
+                    <option value="">--Select--</option>  
+                </select>
+                <span asp-validation-for="Model.BrandId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Category</label>
+                <select asp-for="Model.CategoryId" asp-items="@Model.CategorySelectList" class="form-control" required="required">
+                    <option value="">--Select--</option>  
+                </select>
+                <span asp-validation-for="Model.CategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Special Tag</label>
+                <select asp-for="Model.TagId" asp-items="@Model.TagSelectList" class="form-control" required="required">
+                    <option value="">--Select--</option>  
+                </select>
+                <span asp-validation-for="Model.TagId" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Model.Price" class="control-label"></label>
+                <input asp-for="Model.Price" class="form-control" />
+                <span asp-validation-for="Model.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Model.Color" class="control-label"></label>
+                <input asp-for="Model.Color" class="form-control" />
+                <span asp-validation-for="Model.Color" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Model.Description" class="control-label"></label>
+                <textarea asp-for="Model.Description" class="form-control" rows=4></textarea>
+                <span asp-validation-for="Model.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
