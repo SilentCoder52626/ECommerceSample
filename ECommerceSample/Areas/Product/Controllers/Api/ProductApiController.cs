@@ -14,14 +14,12 @@ namespace ECommerceSample.Areas.Product.Controllers.Api
     public class ProductApiController : ControllerBase
     {
         private readonly ProductRepositoryInterface _productRepo;
-        private readonly ProductServiceInterface _productService;
         private readonly ILogger<ProductApiController> _logger;
 
 
-        public ProductApiController(ProductRepositoryInterface productRepo, ProductServiceInterface productService, ILogger<ProductApiController> logger)
+        public ProductApiController(ProductRepositoryInterface productRepo, ILogger<ProductApiController> logger)
         {
             _productRepo = productRepo;
-            _productService = productService;
             _logger = logger;
         }
         [HttpGet("")]
@@ -71,7 +69,8 @@ namespace ECommerceSample.Areas.Product.Controllers.Api
         {
             try
             {
-                var Product = await _productRepo.GetById(id).ConfigureAwait(true) ?? throw new ProductNotFoundException();
+                var Product = await _productRepo.GetQueryable().Include(x => x.Category).Include(y => y.Brand).Include(y => y.Tag).SingleOrDefaultAsync(a=>a.ProductId==id).ConfigureAwait(true) ?? throw new ProductNotFoundException();
+
                 var Data = ConfigureIndexModel(Product);
 
                 return Ok(Data);
