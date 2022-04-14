@@ -125,8 +125,9 @@ namespace ECommerceSample.Areas.Product.Controllers
                 if (file != null)
                 {
                     #region RemoveOldImage
-                    var Oldpath = Path.Combine(_environment.WebRootPath, model.OldImage);
-                    if ((!Directory.Exists(Oldpath)))
+                    var div = _environment.WebRootPath;
+                    var Oldpath = String.Concat(div, model.OldImage);
+                    if (!Directory.Exists(Oldpath))
                     {
                         System.IO.File.Delete(Oldpath);
                     }
@@ -143,7 +144,7 @@ namespace ECommerceSample.Areas.Product.Controllers
                     {
                         await file.CopyToAsync(fileStream);
                     }
-                    ImagePath = $"/images/{fileName}";
+                    ImagePath = $"/images/{fileName}{model.SKU}";
 
                     #endregion
                 }
@@ -199,7 +200,7 @@ namespace ECommerceSample.Areas.Product.Controllers
                 {
                     await file.CopyToAsync(fileStream);
                 }
-                var ImagePath = $"/images/{fileName}";
+                var ImagePath = $"/images/{fileName}{model.SKU}";
 
                 # endregion
                 var Dto = new ProductCreateDto()

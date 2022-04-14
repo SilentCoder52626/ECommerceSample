@@ -8,7 +8,7 @@ namespace ECommerce.Exceptions
 {
     public class DuplicateTagNameException : Exception
     {
-        public DuplicateTagNameException(string message = "Tag Name Already Used.") : base(message)
+        public DuplicateTagNameException(string name) : base($"Tag Name ({name}) already used.")
         {
 
         }

@@ -6,100 +6,109 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<div class="container">
+    <div class="row mt-2">
+        <div class="col-md-12">
 
-<p>
-    <a class="btn btn-primary" asp-controller="Product" asp-area="Product" asp-action="Create">Add</a>
+            <h2 class="text-center">Product</h2>
+        </div>
+    </div>
+    <p>
+        <a class="btn btn-success" asp-controller="Product" asp-area="Product" asp-action="Create">Add</a>
+    </p>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped table-bordered" id="data-table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>
+                            Id
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            SKU
+                        </th>
+                        <th>
+                            Brand
+                        </th>
+                        <th>
+                            Category
+                        </th>
+                        <th>
+                            Special Tag
+                        </th>
+                        <th>
+                            Price
+                        </th>
 
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Id
-            </th>
-            <th>
-                Name
-            </th>
-            <th>
-                SKU
-            </th>
-            <th>
-                Brand
-            </th>
-            <th>
-                Category
-            </th>
-            <th>
-                Special Tag
-            </th>
-            <th>
-                Price
-            </th>
-
-            <th>
-                Color
-            </th>
-            <th>
-                Is Available
-            </th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SKU)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Brand)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Category)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Tag)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                
-                <td>
-                    @Html.DisplayFor(modelItem => item.Color)
-                </td>
-                <td>
-                    @if (item.AvailibilityStatus == Product.AvailabilityStatusAvailable)
+                        <th>
+                            Color
+                        </th>
+                        <th>
+                            Is Available
+                        </th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
                     {
-                        <span class="badge bg-success">Available</span>
-                    }
-                    else
-                    {
-                        <span class="badge bg-warning">UnAvailable</span>
-                    }
-                </td>
-                <td>
-                    <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-primary">Update</a>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SKU)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Brand)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Category)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Tag)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Price)
+                            </td>
 
-                    @if (item.AvailibilityStatus == Product.AvailabilityStatusAvailable)
-                    {
-                        <a class="btn btn-danger" asp-action="MarkAsUnAvailable" asp-route-id="@item.Id">Set As UnAvailable</a>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Color)
+                            </td>
+                            <td>
+                                @if (item.AvailibilityStatus == Product.AvailabilityStatusAvailable)
+                                {
+                                    <span class="badge bg-success">Available</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-warning">UnAvailable</span>
+                                }
+                            </td>
+                            <td>
+                                <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-primary">Update</a>
 
-                    }
-                    else
-                    {
-                        <a class="btn btn-success" asp-action="MarkAsAvailable" asp-route-id="@item.Id">Set As Available</a>
+                                @if (item.AvailibilityStatus == Product.AvailabilityStatusAvailable)
+                                {
+                                    <a class="btn btn-danger" asp-action="MarkAsUnAvailable" asp-route-id="@item.Id">Set As UnAvailable</a>
 
+                                }
+                                else
+                                {
+                                    <a class="btn btn-success" asp-action="MarkAsAvailable" asp-route-id="@item.Id">Set As Available</a>
+
+                                }
+                            </td>
+                        </tr>
                     }
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
