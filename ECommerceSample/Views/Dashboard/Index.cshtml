@@ -1,9 +1,60 @@
-﻿@{
+﻿@model DashboardViewModel
+@{
     ViewData["Title"] = "Dashboard";
 }
-<div class="container">
+<div class="container mt-2">
 
-    <div class="text-center">
-        <h1>Under Construction</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card bg-success text-white mb-4">
+                <div class="card-body" style="font-size:24px;">Products <span class="badge bg-dark">@Model.TotalProducts</span></div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" asp-area="Product" asp-controller="Product" asp-action="Index" style="text-decoration:none;">View Details</a>
+                    <div class="small text-white"><i class="fa fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card bg-warning text-white mb-4">
+                <div class="card-body" style="font-size:24px;">Brands <span class="badge bg-dark">@Model.TotalBrands</span></div>
+
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" asp-area="Product" asp-controller="Brand" asp-action="Index" style="text-decoration:none;">View Details</a>
+                    <div class="small text-white"><i class="fa fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card bg-danger text-white mb-4">
+                <div class="card-body" style="font-size:24px;">Categories <span class="badge bg-dark">@Model.TotalCategories</span></div>
+
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" asp-area="Product" asp-controller="Category" asp-action="Index" style="text-decoration:none;">View Details</a>
+                    <div class="small text-white"><i class="fa fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card bg-primary text-white mb-4">
+                <div class="card-body" style="font-size:24px;">Tags <span class="badge bg-dark">@Model.TotalTags</span></div>
+
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" asp-area="Product" asp-controller="Tag" asp-action="Index" style="text-decoration:none;">View Details</a>
+                    <div class="small text-white"><i class="fa fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div style="border:solid 1px; margin:2px;">
+                <div  style="text-align:center; font-size:100px;">
+                <p>COMMON WORLD</p>
+                <p>ECommerce</p>
+
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
