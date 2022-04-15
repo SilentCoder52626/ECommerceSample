@@ -3,6 +3,8 @@
 This is a simple ECommerce web application.
 		
 **Fetaures**
+ - User System
+	 - Default Identity System 
  - CRUD
 	 - Brand
 	 - Category
