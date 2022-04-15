@@ -21,3 +21,14 @@ window.addEventListener('DOMContentLoaded', event => {
 
 
 });
+
+$(function () {
+    var DetailsId = $("#DetailsPage");
+    $('button[data-toggle="ajax-modal"]').click(function (event) {
+        var url = $(this).data('url');
+        $get(url).done(function (data) {
+            DetailsId.html(data);
+            DetailsId.find('.model').modal('show');
+        });
+    });
+});

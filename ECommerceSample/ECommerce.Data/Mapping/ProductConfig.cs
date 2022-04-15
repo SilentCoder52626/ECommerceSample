@@ -59,6 +59,7 @@ namespace ECommerce.Data.Mapping
                 .ToTable("product")
                 .Property(c => c.Price)
                 .HasColumnName("price")
+                .HasPrecision(18,2)
                 .IsRequired();
             builder
                 .ToTable("product")

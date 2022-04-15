@@ -134,7 +134,7 @@ namespace ECommerceSample.Areas.Product.Controllers
                     #endregion
 
                     #region Image Upload
-                    var path = Path.Combine(_environment.WebRootPath, "images/");
+                    var path = Path.Combine(_environment.WebRootPath, $"images/{model.SKU}/");
                     if ((!Directory.Exists(path)))
                     {
                         Directory.CreateDirectory(path);
@@ -144,7 +144,7 @@ namespace ECommerceSample.Areas.Product.Controllers
                     {
                         await file.CopyToAsync(fileStream);
                     }
-                    ImagePath = $"/images/{fileName}{model.SKU}";
+                    ImagePath = $"/images/{model.SKU}/{fileName}";
 
                     #endregion
                 }
@@ -190,7 +190,7 @@ namespace ECommerceSample.Areas.Product.Controllers
                     return View(model);
                 }
                 #region Image Upload
-                var path = Path.Combine(_environment.WebRootPath, "images/");
+                var path = Path.Combine(_environment.WebRootPath, $"images/{model.SKU}/");
                 if ((!Directory.Exists(path)))
                 {
                     Directory.CreateDirectory(path);
@@ -200,7 +200,7 @@ namespace ECommerceSample.Areas.Product.Controllers
                 {
                     await file.CopyToAsync(fileStream);
                 }
-                var ImagePath = $"/images/{fileName}{model.SKU}";
+                var ImagePath = $"/images/{model.SKU}/{fileName}";
 
                 # endregion
                 var Dto = new ProductCreateDto()
